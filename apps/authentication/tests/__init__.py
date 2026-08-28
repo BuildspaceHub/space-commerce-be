@@ -1,0 +1,3 @@
+from .test_authentication import test_valid_access_token_authenticates_user
+
+__all__ = ['test_valid_access_token_authenticates_user']
