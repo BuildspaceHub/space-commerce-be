@@ -114,9 +114,25 @@ uv run python manage.py test
 ```
 
 If pytest is adopted:
+### Running all tests
 
 ```bash
 uv run pytest
+```
+
+### Running tests for a specific app
+```bash
+uv run pytest apps/authentication/tests/
+```
+
+### Running a specific test file
+```bash
+uv run pytest apps/authentication/tests/test_authentication.py
+```
+
+### Running a specific test
+```bash
+uv run pytest apps/authentication/tests/test_authentication.py::test_valid_access_token_authenticates_user
 ```
 
 Do not introduce a second test runner without agreement from the backend lead.
