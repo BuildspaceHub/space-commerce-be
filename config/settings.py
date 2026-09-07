@@ -32,6 +32,9 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework_simplejwt.token_blacklist',
 
+    'drf_spectacular',
+    'drf_spectacular_sidecar',
+
     # Local
     "apps.authentication",
     "apps.users",
@@ -69,6 +72,9 @@ WSGI_APPLICATION = 'config.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/6.1/ref/settings/#databases
+# import dj_database_url
+# from decouple import config
+
 
 DATABASES = {
     "default": {
@@ -77,7 +83,7 @@ DATABASES = {
         "USER": os.getenv("DB_USER"),
         "PASSWORD": os.getenv("DB_PASSWORD"),
         "HOST": os.getenv("DB_HOST"),
-        "PORT": os.getenv("DB_PORT", "5432"),
+        "PORT": os.getenv("DB_PORT"),
     }
 }
 
@@ -134,6 +140,7 @@ REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": (
         "apps.authentication.authentication.CookieJWTAuthentication",
     ),
+    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
 }
 
 # Simple JWT
@@ -177,3 +184,16 @@ AUTH_REFRESH_COOKIE_MAX_AGE = 7 * 24 * 60 * 60
 
 # Custom User Model
 AUTH_USER_MODEL = "users.User"
+
+
+# Spectacular settings
+SPECTACULAR_SETTINGS = {
+    'TITLE': 'Space Commerce API',
+    'DESCRIPTION': 'API documentation for Space Commerce',
+    'VERSION': '1.0.0',
+    'SERVE_INCLUDE_SCHEMA': False,
+    # OTHER SETTINGS
+    'SWAGGER_UI_DIST': 'SIDECAR',  # shorthand to use the sidecar instead
+    'SWAGGER_UI_FAVICON_HREF': 'SIDECAR',
+    'REDOC_DIST': 'SIDECAR',
+}
